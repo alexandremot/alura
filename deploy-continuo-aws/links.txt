@@ -1,0 +1,20 @@
+
+# aws key key_pair
+cd /c/Users/Ale/.aws/key_pair
+
+
+# setenv.sh (tomcat)
+/usr/share/tomcat8/bin/setenv.sh
+
+
+# tomcat logs:
+/var/lib/tomcat8/logs
+
+
+# duvida postada na Alura
+https://cursos.alura.com.br/forum/topico-aplicacao-nao-abre-quando-tento-acessa-la-119956
+
+
+# git contendo código da dúvida (erro 404)
+https://gist.github.com/alexandremot/f32dc236faf6dcc59a23e9b4752908ca
+
