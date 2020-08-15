@@ -1,8 +1,9 @@
 
 FROM node:latest
-MAINTAINER Alexandre Mota
-COPY . /var/wwww
+LABEL maintainer="Alexandre Mota"
+ENV PORT=3000
+COPY . /var/www
 WORKDIR /var/www
 RUN npm install
-ENTRYPOINT ["npm", "start"]
-EXPOSE 3000
+ENTRYPOINT npm start
+EXPOSE $PORT
