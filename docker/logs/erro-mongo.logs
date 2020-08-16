@@ -1,0 +1,345 @@
+ale@my-linux:~/programming/alura/docker/example-cap_06$ docker-compose build
+mongodb uses an image, skipping
+Building node1
+Step 1/8 : FROM node:latest
+latest: Pulling from library/node
+419e7ae5bb1e: Pull complete
+848839e0cd3b: Pull complete
+de30e8b35015: Pull complete
+258fdea6ea48: Pull complete
+ddb75eb7f1e9: Pull complete
+7ec8a0667334: Pull complete
+c6d8dab5779d: Pull complete
+d3ae9be01b42: Pull complete
+38ff96b6f833: Pull complete
+Digest: sha256:8b6401f8d15c900736a54a870994277b3de19ebd28cc483c497bf00d608e2a90
+Status: Downloaded newer image for node:latest
+ ---> 784e696f5060
+Step 2/8 : MAINTAINER Douglas Quintanilha
+ ---> Running in 27e9c00d670e
+Removing intermediate container 27e9c00d670e
+ ---> 2613b71ab57b
+Step 3/8 : ENV NODE_ENV=development
+ ---> Running in 66a88e25f507
+Removing intermediate container 66a88e25f507
+ ---> 5ced0d1cc8ce
+Step 4/8 : COPY . /var/www
+ ---> 49a7df9384ad
+Step 5/8 : WORKDIR /var/www
+ ---> Running in 37c71553ebac
+Removing intermediate container 37c71553ebac
+ ---> 1166f3657571
+Step 6/8 : RUN npm install
+ ---> Running in 6f152e008906
+npm WARN deprecated bson@1.0.9: Fixed a critical issue with BSON serialization documented in CVE-2019-2391, see https://bit.ly/2KcpXdo for more details
+npm notice created a lockfile as package-lock.json. You should commit this file.
+added 127 packages from 117 contributors and audited 127 packages in 10.656s
+found 1 high severity vulnerability
+  run `npm audit fix` to fix them, or `npm audit` for details
+Removing intermediate container 6f152e008906
+ ---> ff3b0273db10
+Step 7/8 : ENTRYPOINT ["npm", "start"]
+ ---> Running in 4f8aee070b27
+Removing intermediate container 4f8aee070b27
+ ---> 277b7423fab4
+Step 8/8 : EXPOSE 3000
+ ---> Running in 2e7a6a78f82b
+Removing intermediate container 2e7a6a78f82b
+ ---> 85a4b941bb8f
+Successfully built 85a4b941bb8f
+Successfully tagged alexandremot/alura-books.dockerfile:latest
+Building node2
+Step 1/8 : FROM node:latest
+ ---> 784e696f5060
+Step 2/8 : MAINTAINER Douglas Quintanilha
+ ---> Using cache
+ ---> 2613b71ab57b
+Step 3/8 : ENV NODE_ENV=development
+ ---> Using cache
+ ---> 5ced0d1cc8ce
+Step 4/8 : COPY . /var/www
+ ---> Using cache
+ ---> 49a7df9384ad
+Step 5/8 : WORKDIR /var/www
+ ---> Using cache
+ ---> 1166f3657571
+Step 6/8 : RUN npm install
+ ---> Using cache
+ ---> ff3b0273db10
+Step 7/8 : ENTRYPOINT ["npm", "start"]
+ ---> Using cache
+ ---> 277b7423fab4
+Step 8/8 : EXPOSE 3000
+ ---> Using cache
+ ---> 85a4b941bb8f
+Successfully built 85a4b941bb8f
+Successfully tagged alexandremot/alura-books.dockerfile:latest
+Building node3
+Step 1/8 : FROM node:latest
+ ---> 784e696f5060
+Step 2/8 : MAINTAINER Douglas Quintanilha
+ ---> Using cache
+ ---> 2613b71ab57b
+Step 3/8 : ENV NODE_ENV=development
+ ---> Using cache
+ ---> 5ced0d1cc8ce
+Step 4/8 : COPY . /var/www
+ ---> Using cache
+ ---> 49a7df9384ad
+Step 5/8 : WORKDIR /var/www
+ ---> Using cache
+ ---> 1166f3657571
+Step 6/8 : RUN npm install
+ ---> Using cache
+ ---> ff3b0273db10
+Step 7/8 : ENTRYPOINT ["npm", "start"]
+ ---> Using cache
+ ---> 277b7423fab4
+Step 8/8 : EXPOSE 3000
+ ---> Using cache
+ ---> 85a4b941bb8f
+Successfully built 85a4b941bb8f
+Successfully tagged alexandremot/alura-books.dockerfile:latest
+Building nginx
+Step 1/8 : FROM nginx:latest
+latest: Pulling from library/nginx
+bf5952930446: Pull complete
+cb9a6de05e5a: Pull complete
+9513ea0afb93: Pull complete
+b49ea07d2e93: Pull complete
+a5e4a503d449: Pull complete
+Digest: sha256:b0ad43f7ee5edbc0effbc14645ae7055e21bc1973aee5150745632a24a752661
+Status: Downloaded newer image for nginx:latest
+ ---> 4bb46517cac3
+Step 2/8 : LABEL maintainer="Alexandre Mota"
+ ---> Running in 2fd7cc40aff7
+Removing intermediate container 2fd7cc40aff7
+ ---> 050dd6336828
+Step 3/8 : COPY /public /var/www/public
+ ---> 637c77937253
+Step 4/8 : COPY /docker/config/nginx.conf /etc/nginx/nginx.conf
+ale@my-linux:~/programming/alura/docker/example-cap_06$ docker-compose up
+Creating network "example-cap_06_production-network" with driver "bridge"
+Creating example-cap_06_mongodb_1 ... done
+Creating alura-books-3            ... done
+Creating alura-books-1            ... done
+Creating alura-books-2            ... done
+Creating nginx                    ... done
+Attaching to example-cap_06_mongodb_1, alura-books-3, alura-books-1, alura-books-2, nginx
+alura-books-2 | 
+alura-books-2 | > alura-docker@1.0.0 start /var/www
+alura-books-2 | > node server.js
+alura-books-2 | 
+alura-books-3 | 
+alura-books-3 | > alura-docker@1.0.0 start /var/www
+alura-books-3 | > node server.js
+alura-books-3 | 
+alura-books-1 | 
+alura-books-1 | > alura-docker@1.0.0 start /var/www
+alura-books-1 | > node server.js
+alura-books-1 | 
+alura-books-2 | marko/express has moved into it's own module, install @marko/express instead.
+alura-books-1 | marko/express has moved into it's own module, install @marko/express instead.
+alura-books-3 | marko/express has moved into it's own module, install @marko/express instead.
+alura-books-2 | 
+alura-books-2 | MIGRATION
+alura-books-2 | Non standard template literals have been deprecated, please use javascript template literals instead. See: https://github.com/marko-js/marko/wiki/Deprecation:-nonstandard-template-literals
+alura-books-2 |   at views/index.marko
+alura-books-2 | 
+alura-books-3 | 
+alura-books-3 | MIGRATION
+alura-books-3 | Non standard template literals have been deprecated, please use javascript template literals instead. See: https://github.com/marko-js/marko/wiki/Deprecation:-nonstandard-template-literals
+alura-books-3 |   at views/index.marko
+alura-books-3 | 
+alura-books-2 | 
+alura-books-2 | MIGRATION
+alura-books-2 | The "<for(...)>" syntax has been deprecated, checkout the modern syntax here: https://github.com/marko-js/marko/wiki/Deprecation:-legacy-for
+alura-books-2 |   at views/index.marko:18:3
+alura-books-2 | 
+alura-books-1 | 
+alura-books-1 | MIGRATION
+alura-books-1 | Non standard template literals have been deprecated, please use javascript template literals instead. See: https://github.com/marko-js/marko/wiki/Deprecation:-nonstandard-template-literals
+alura-books-1 |   at views/index.marko
+alura-books-1 | 
+alura-books-2 | (node:18) DeprecationWarning: `open()` is deprecated in mongoose >= 4.11.0, use `openUri()` instead, or set the `useMongoClient` option if using `connect()` or `createConnection()`. See http://mongoosejs.com/docs/4.x/docs/connections.html#use-mongo-client
+alura-books-2 | (Use `node --trace-deprecation ...` to show where the warning was created)
+alura-books-3 | 
+alura-books-3 | MIGRATION
+alura-books-3 | The "<for(...)>" syntax has been deprecated, checkout the modern syntax here: https://github.com/marko-js/marko/wiki/Deprecation:-legacy-for
+alura-books-3 |   at views/index.marko:18:3
+alura-books-3 | 
+alura-books-2 | Server initialiazed on port 3000
+alura-books-1 | 
+alura-books-1 | MIGRATION
+alura-books-1 | The "<for(...)>" syntax has been deprecated, checkout the modern syntax here: https://github.com/marko-js/marko/wiki/Deprecation:-legacy-for
+alura-books-1 |   at views/index.marko:18:3
+alura-books-1 | 
+alura-books-2 | 
+alura-books-2 |  Mongoose! Disconnected from mongodb://mongodb:27017/alura-books
+alura-books-3 | (node:18) DeprecationWarning: `open()` is deprecated in mongoose >= 4.11.0, use `openUri()` instead, or set the `useMongoClient` option if using `connect()` or `createConnection()`. See http://mongoosejs.com/docs/4.x/docs/connections.html#use-mongo-client
+alura-books-3 | (Use `node --trace-deprecation ...` to show where the warning was created)
+alura-books-2 | 
+alura-books-2 |  Mongoose! Connection error: MongoError: failed to connect to server [mongodb:27017] on first connect [Error: connect ECONNREFUSED 172.20.0.2:27017
+alura-books-2 |     at TCPConnectWrap.afterConnect [as oncomplete] (net.js:1144:16) {
+alura-books-2 |   name: 'MongoError'
+alura-books-2 | }]
+alura-books-1 | (node:18) DeprecationWarning: `open()` is deprecated in mongoose >= 4.11.0, use `openUri()` instead, or set the `useMongoClient` option if using `connect()` or `createConnection()`. See http://mongoosejs.com/docs/4.x/docs/connections.html#use-mongo-client
+alura-books-1 | (Use `node --trace-deprecation ...` to show where the warning was created)
+alura-books-2 | (node:18) UnhandledPromiseRejectionWarning: MongoError: failed to connect to server [mongodb:27017] on first connect [Error: connect ECONNREFUSED 172.20.0.2:27017
+alura-books-2 |     at TCPConnectWrap.afterConnect [as oncomplete] (net.js:1144:16) {
+alura-books-2 |   name: 'MongoError'
+alura-books-2 | }]
+alura-books-2 |     at Pool.<anonymous> (/var/www/node_modules/mongodb-core/lib/topologies/server.js:336:35)
+alura-books-2 |     at Pool.emit (events.js:314:20)
+alura-books-2 |     at Connection.<anonymous> (/var/www/node_modules/mongodb-core/lib/connection/pool.js:280:12)
+alura-books-2 |     at Object.onceWrapper (events.js:421:26)
+alura-books-2 |     at Connection.emit (events.js:314:20)
+alura-books-2 |     at Socket.<anonymous> (/var/www/node_modules/mongodb-core/lib/connection/connection.js:189:49)
+alura-books-2 |     at Object.onceWrapper (events.js:421:26)
+alura-books-2 |     at Socket.emit (events.js:314:20)
+alura-books-2 |     at emitErrorNT (internal/streams/destroy.js:100:8)
+alura-books-2 |     at emitErrorCloseNT (internal/streams/destroy.js:68:3)
+alura-books-2 |     at processTicksAndRejections (internal/process/task_queues.js:80:21)
+alura-books-3 | Server initialiazed on port 3000
+alura-books-1 | Server initialiazed on port 3000
+alura-books-2 | (node:18) UnhandledPromiseRejectionWarning: Unhandled promise rejection. This error originated either by throwing inside of an async function without a catch block, or by rejecting a promise which was not handled with .catch(). To terminate the node process on unhandled promise rejection, use the CLI flag `--unhandled-rejections=strict` (see https://nodejs.org/api/cli.html#cli_unhandled_rejections_mode). (rejection id: 1)
+alura-books-3 | 
+alura-books-3 |  Mongoose! Disconnected from mongodb://mongodb:27017/alura-books
+alura-books-1 | 
+alura-books-1 |  Mongoose! Disconnected from mongodb://mongodb:27017/alura-books
+alura-books-2 | (node:18) [DEP0018] DeprecationWarning: Unhandled promise rejections are deprecated. In the future, promise rejections that are not handled will terminate the Node.js process with a non-zero exit code.
+alura-books-3 | 
+alura-books-3 |  Mongoose! Connection error: MongoError: failed to connect to server [mongodb:27017] on first connect [Error: connect ECONNREFUSED 172.20.0.2:27017
+alura-books-3 |     at TCPConnectWrap.afterConnect [as oncomplete] (net.js:1144:16) {
+alura-books-3 |   name: 'MongoError'
+alura-books-3 | }]
+alura-books-3 | (node:18) UnhandledPromiseRejectionWarning: MongoError: failed to connect to server [mongodb:27017] on first connect [Error: connect ECONNREFUSED 172.20.0.2:27017
+alura-books-3 |     at TCPConnectWrap.afterConnect [as oncomplete] (net.js:1144:16) {
+alura-books-3 |   name: 'MongoError'
+alura-books-3 | }]
+alura-books-3 |     at Pool.<anonymous> (/var/www/node_modules/mongodb-core/lib/topologies/server.js:336:35)
+alura-books-3 |     at Pool.emit (events.js:314:20)
+alura-books-3 |     at Connection.<anonymous> (/var/www/node_modules/mongodb-core/lib/connection/pool.js:280:12)
+alura-books-3 |     at Object.onceWrapper (events.js:421:26)
+alura-books-3 |     at Connection.emit (events.js:314:20)
+alura-books-3 |     at Socket.<anonymous> (/var/www/node_modules/mongodb-core/lib/connection/connection.js:189:49)
+alura-books-3 |     at Object.onceWrapper (events.js:421:26)
+alura-books-3 |     at Socket.emit (events.js:314:20)
+alura-books-3 |     at emitErrorNT (internal/streams/destroy.js:100:8)
+alura-books-3 |     at emitErrorCloseNT (internal/streams/destroy.js:68:3)
+alura-books-3 |     at processTicksAndRejections (internal/process/task_queues.js:80:21)
+alura-books-1 | 
+alura-books-1 |  Mongoose! Connection error: MongoError: failed to connect to server [mongodb:27017] on first connect [Error: connect ECONNREFUSED 172.20.0.2:27017
+alura-books-1 |     at TCPConnectWrap.afterConnect [as oncomplete] (net.js:1144:16) {
+alura-books-1 |   name: 'MongoError'
+alura-books-1 | }]
+alura-books-3 | (node:18) UnhandledPromiseRejectionWarning: Unhandled promise rejection. This error originated either by throwing inside of an async function without a catch block, or by rejecting a promise which was not handled with .catch(). To terminate the node process on unhandled promise rejection, use the CLI flag `--unhandled-rejections=strict` (see https://nodejs.org/api/cli.html#cli_unhandled_rejections_mode). (rejection id: 1)
+alura-books-3 | (node:18) [DEP0018] DeprecationWarning: Unhandled promise rejections are deprecated. In the future, promise rejections that are not handled will terminate the Node.js process with a non-zero exit code.
+alura-books-1 | (node:18) UnhandledPromiseRejectionWarning: MongoError: failed to connect to server [mongodb:27017] on first connect [Error: connect ECONNREFUSED 172.20.0.2:27017
+alura-books-1 |     at TCPConnectWrap.afterConnect [as oncomplete] (net.js:1144:16) {
+alura-books-1 |   name: 'MongoError'
+alura-books-1 | }]
+alura-books-1 |     at Pool.<anonymous> (/var/www/node_modules/mongodb-core/lib/topologies/server.js:336:35)
+alura-books-1 |     at Pool.emit (events.js:314:20)
+alura-books-1 |     at Connection.<anonymous> (/var/www/node_modules/mongodb-core/lib/connection/pool.js:280:12)
+alura-books-1 |     at Object.onceWrapper (events.js:421:26)
+alura-books-1 |     at Connection.emit (events.js:314:20)
+alura-books-1 |     at Socket.<anonymous> (/var/www/node_modules/mongodb-core/lib/connection/connection.js:189:49)
+alura-books-1 |     at Object.onceWrapper (events.js:421:26)
+alura-books-1 |     at Socket.emit (events.js:314:20)
+alura-books-1 |     at emitErrorNT (internal/streams/destroy.js:100:8)
+alura-books-1 |     at emitErrorCloseNT (internal/streams/destroy.js:68:3)
+alura-books-1 |     at processTicksAndRejections (internal/process/task_queues.js:80:21)
+alura-books-1 | (node:18) UnhandledPromiseRejectionWarning: Unhandled promise rejection. This error originated either by throwing inside of an async function without a catch block, or by rejecting a promise which was not handled with .catch(). To terminate the node process on unhandled promise rejection, use the CLI flag `--unhandled-rejections=strict` (see https://nodejs.org/api/cli.html#cli_unhandled_rejections_mode). (rejection id: 1)
+alura-books-1 | (node:18) [DEP0018] DeprecationWarning: Unhandled promise rejections are deprecated. In the future, promise rejections that are not handled will terminate the Node.js process with a non-zero exit code.
+mongodb_1  | {"t":{"$date":"2020-08-16T18:19:01.837+00:00"},"s":"I",  "c":"CONTROL",  "id":23285,   "ctx":"main","msg":"Automatically disabling TLS 1.0, to force-enable TLS 1.0 specify --sslDisabledProtocols 'none'"}
+mongodb_1  | {"t":{"$date":"2020-08-16T18:19:01.951+00:00"},"s":"W",  "c":"ASIO",     "id":22601,   "ctx":"main","msg":"No TransportLayer configured during NetworkInterface startup"}
+mongodb_1  | {"t":{"$date":"2020-08-16T18:19:01.951+00:00"},"s":"I",  "c":"NETWORK",  "id":4648601, "ctx":"main","msg":"Implicit TCP FastOpen unavailable. If TCP FastOpen is required, set tcpFastOpenServer, tcpFastOpenClient, and tcpFastOpenQueueSize."}
+mongodb_1  | {"t":{"$date":"2020-08-16T18:19:01.952+00:00"},"s":"I",  "c":"STORAGE",  "id":4615611, "ctx":"initandlisten","msg":"MongoDB starting","attr":{"pid":1,"port":27017,"dbPath":"/data/db","architecture":"64-bit","host":"d3692545d78c"}}
+mongodb_1  | {"t":{"$date":"2020-08-16T18:19:01.952+00:00"},"s":"I",  "c":"CONTROL",  "id":23403,   "ctx":"initandlisten","msg":"Build Info","attr":{"buildInfo":{"version":"4.4.0","gitVersion":"563487e100c4215e2dce98d0af2a6a5a2d67c5cf","openSSLVersion":"OpenSSL 1.1.1  11 Sep 2018","modules":[],"allocator":"tcmalloc","environment":{"distmod":"ubuntu1804","distarch":"x86_64","target_arch":"x86_64"}}}}
+mongodb_1  | {"t":{"$date":"2020-08-16T18:19:01.952+00:00"},"s":"I",  "c":"CONTROL",  "id":51765,   "ctx":"initandlisten","msg":"Operating System","attr":{"os":{"name":"Ubuntu","version":"18.04"}}}
+mongodb_1  | {"t":{"$date":"2020-08-16T18:19:01.952+00:00"},"s":"I",  "c":"CONTROL",  "id":21951,   "ctx":"initandlisten","msg":"Options set by command line","attr":{"options":{"net":{"bindIp":"*"}}}}
+mongodb_1  | {"t":{"$date":"2020-08-16T18:19:02.008+00:00"},"s":"I",  "c":"STORAGE",  "id":22297,   "ctx":"initandlisten","msg":"Using the XFS filesystem is strongly recommended with the WiredTiger storage engine. See http://dochub.mongodb.org/core/prodnotes-filesystem","tags":["startupWarnings"]}
+mongodb_1  | {"t":{"$date":"2020-08-16T18:19:02.008+00:00"},"s":"I",  "c":"STORAGE",  "id":22315,   "ctx":"initandlisten","msg":"Opening WiredTiger","attr":{"config":"create,cache_size=2368M,session_max=33000,eviction=(threads_min=4,threads_max=4),config_base=false,statistics=(fast),log=(enabled=true,archive=true,path=journal,compressor=snappy),file_manager=(close_idle_time=100000,close_scan_interval=10,close_handle_minimum=250),statistics_log=(wait=0),verbose=[recovery_progress,checkpoint_progress,compact_progress],"}}
+mongodb_1  | {"t":{"$date":"2020-08-16T18:19:03.380+00:00"},"s":"I",  "c":"STORAGE",  "id":22430,   "ctx":"initandlisten","msg":"WiredTiger message","attr":{"message":"[1597601943:380411][1:0x7f7e372b3a80], txn-recover: [WT_VERB_RECOVERY | WT_VERB_RECOVERY_PROGRESS] Set global recovery timestamp: (0, 0)"}}
+mongodb_1  | {"t":{"$date":"2020-08-16T18:19:03.585+00:00"},"s":"I",  "c":"STORAGE",  "id":4795906, "ctx":"initandlisten","msg":"WiredTiger opened","attr":{"durationMillis":1577}}
+mongodb_1  | {"t":{"$date":"2020-08-16T18:19:03.585+00:00"},"s":"I",  "c":"RECOVERY", "id":23987,   "ctx":"initandlisten","msg":"WiredTiger recoveryTimestamp","attr":{"recoveryTimestamp":{"$timestamp":{"t":0,"i":0}}}}
+mongodb_1  | {"t":{"$date":"2020-08-16T18:19:03.992+00:00"},"s":"I",  "c":"STORAGE",  "id":22262,   "ctx":"initandlisten","msg":"Timestamp monitor starting"}
+mongodb_1  | {"t":{"$date":"2020-08-16T18:19:04.140+00:00"},"s":"W",  "c":"CONTROL",  "id":22120,   "ctx":"initandlisten","msg":"Access control is not enabled for the database. Read and write access to data and configuration is unrestricted","tags":["startupWarnings"]}
+mongodb_1  | {"t":{"$date":"2020-08-16T18:19:04.140+00:00"},"s":"W",  "c":"CONTROL",  "id":22178,   "ctx":"initandlisten","msg":"/sys/kernel/mm/transparent_hugepage/enabled is 'always'. We suggest setting it to 'never'","tags":["startupWarnings"]}
+mongodb_1  | {"t":{"$date":"2020-08-16T18:19:04.262+00:00"},"s":"I",  "c":"STORAGE",  "id":20320,   "ctx":"initandlisten","msg":"createCollection","attr":{"namespace":"admin.system.version","uuidDisposition":"provided","uuid":{"uuid":{"$uuid":"0778eccb-3b0e-4fd5-9b88-ed4a704fd3eb"}},"options":{"uuid":{"$uuid":"0778eccb-3b0e-4fd5-9b88-ed4a704fd3eb"}}}}
+mongodb_1  | {"t":{"$date":"2020-08-16T18:19:04.545+00:00"},"s":"I",  "c":"INDEX",    "id":20345,   "ctx":"initandlisten","msg":"Index build: done building","attr":{"buildUUID":null,"namespace":"admin.system.version","index":"_id_","commitTimestamp":{"$timestamp":{"t":0,"i":0}}}}
+mongodb_1  | {"t":{"$date":"2020-08-16T18:19:04.545+00:00"},"s":"I",  "c":"COMMAND",  "id":20459,   "ctx":"initandlisten","msg":"Setting featureCompatibilityVersion","attr":{"newVersion":"4.4"}}
+mongodb_1  | {"t":{"$date":"2020-08-16T18:19:04.609+00:00"},"s":"I",  "c":"STORAGE",  "id":20536,   "ctx":"initandlisten","msg":"Flow Control is enabled on this deployment"}
+mongodb_1  | {"t":{"$date":"2020-08-16T18:19:04.655+00:00"},"s":"I",  "c":"STORAGE",  "id":20320,   "ctx":"initandlisten","msg":"createCollection","attr":{"namespace":"local.startup_log","uuidDisposition":"generated","uuid":{"uuid":{"$uuid":"d89d64ca-c745-4642-af33-832646cca7d3"}},"options":{"capped":true,"size":10485760}}}
+mongodb_1  | {"t":{"$date":"2020-08-16T18:19:04.919+00:00"},"s":"I",  "c":"INDEX",    "id":20345,   "ctx":"initandlisten","msg":"Index build: done building","attr":{"buildUUID":null,"namespace":"local.startup_log","index":"_id_","commitTimestamp":{"$timestamp":{"t":0,"i":0}}}}
+mongodb_1  | {"t":{"$date":"2020-08-16T18:19:04.920+00:00"},"s":"I",  "c":"FTDC",     "id":20625,   "ctx":"initandlisten","msg":"Initializing full-time diagnostic data capture","attr":{"dataDirectory":"/data/db/diagnostic.data"}}
+mongodb_1  | {"t":{"$date":"2020-08-16T18:19:04.927+00:00"},"s":"I",  "c":"NETWORK",  "id":23015,   "ctx":"listener","msg":"Listening on","attr":{"address":"/tmp/mongodb-27017.sock"}}
+mongodb_1  | {"t":{"$date":"2020-08-16T18:19:04.927+00:00"},"s":"I",  "c":"NETWORK",  "id":23015,   "ctx":"listener","msg":"Listening on","attr":{"address":"0.0.0.0"}}
+mongodb_1  | {"t":{"$date":"2020-08-16T18:19:04.927+00:00"},"s":"I",  "c":"NETWORK",  "id":23016,   "ctx":"listener","msg":"Waiting for connections","attr":{"port":27017,"ssl":"off"}}
+mongodb_1  | {"t":{"$date":"2020-08-16T18:19:05.101+00:00"},"s":"I",  "c":"COMMAND",  "id":51803,   "ctx":"LogicalSessionCacheReap","msg":"Slow query","attr":{"type":"command","ns":"config.system.sessions","command":{"listIndexes":"system.sessions","cursor":{},"$db":"config"},"numYields":0,"ok":0,"errMsg":"ns does not exist: config.system.sessions","errName":"NamespaceNotFound","errCode":26,"reslen":134,"locks":{"ReplicationStateTransition":{"acquireCount":{"w":2}},"Global":{"acquireCount":{"r":2}},"Database":{"acquireCount":{"r":2}},"Collection":{"acquireCount":{"r":1}},"Mutex":{"acquireCount":{"r":2}}},"protocol":"op_msg","durationMillis":175}}
+mongodb_1  | {"t":{"$date":"2020-08-16T18:19:05.101+00:00"},"s":"I",  "c":"COMMAND",  "id":51803,   "ctx":"LogicalSessionCacheRefresh","msg":"Slow query","attr":{"type":"command","ns":"config.system.sessions","command":{"listIndexes":"system.sessions","cursor":{},"$db":"config"},"numYields":0,"ok":0,"errMsg":"ns does not exist: config.system.sessions","errName":"NamespaceNotFound","errCode":26,"reslen":134,"locks":{"ReplicationStateTransition":{"acquireCount":{"w":2}},"Global":{"acquireCount":{"r":2}},"Database":{"acquireCount":{"r":2}},"Collection":{"acquireCount":{"r":1}},"Mutex":{"acquireCount":{"r":2}}},"protocol":"op_msg","durationMillis":176}}
+mongodb_1  | {"t":{"$date":"2020-08-16T18:19:05.112+00:00"},"s":"I",  "c":"STORAGE",  "id":20320,   "ctx":"LogicalSessionCacheRefresh","msg":"createCollection","attr":{"namespace":"config.system.sessions","uuidDisposition":"generated","uuid":{"uuid":{"$uuid":"9bb78c2f-5632-491d-b2bb-e298674e321f"}},"options":{}}}
+mongodb_1  | {"t":{"$date":"2020-08-16T18:19:05.126+00:00"},"s":"I",  "c":"CONTROL",  "id":20712,   "ctx":"LogicalSessionCacheReap","msg":"Sessions collection is not set up; waiting until next sessions reap interval","attr":{"error":"NamespaceNotFound: config.system.sessions does not exist"}}
+mongodb_1  | {"t":{"$date":"2020-08-16T18:19:05.501+00:00"},"s":"I",  "c":"INDEX",    "id":20345,   "ctx":"LogicalSessionCacheRefresh","msg":"Index build: done building","attr":{"buildUUID":null,"namespace":"config.system.sessions","index":"_id_","commitTimestamp":{"$timestamp":{"t":0,"i":0}}}}
+mongodb_1  | {"t":{"$date":"2020-08-16T18:19:05.501+00:00"},"s":"I",  "c":"INDEX",    "id":20345,   "ctx":"LogicalSessionCacheRefresh","msg":"Index build: done building","attr":{"buildUUID":null,"namespace":"config.system.sessions","index":"lsidTTLIndex","commitTimestamp":{"$timestamp":{"t":0,"i":0}}}}
+mongodb_1  | {"t":{"$date":"2020-08-16T18:19:05.501+00:00"},"s":"I",  "c":"COMMAND",  "id":51803,   "ctx":"LogicalSessionCacheRefresh","msg":"Slow query","attr":{"type":"command","ns":"config.system.sessions","command":{"createIndexes":"system.sessions","indexes":[{"key":{"lastUse":1},"name":"lsidTTLIndex","expireAfterSeconds":1800}],"writeConcern":{},"$db":"config"},"numYields":0,"reslen":114,"locks":{"ParallelBatchWriterMode":{"acquireCount":{"r":3}},"ReplicationStateTransition":{"acquireCount":{"w":3}},"Global":{"acquireCount":{"w":3}},"Database":{"acquireCount":{"w":3}},"Collection":{"acquireCount":{"r":2,"w":2}},"Mutex":{"acquireCount":{"r":4}}},"flowControl":{"acquireCount":1,"timeAcquiringMicros":3},"storage":{},"protocol":"op_msg","durationMillis":388}}
+alura-books-1 | Exibindo a Home!
+alura-books-1 | 
+alura-books-1 | WARNING!!
+alura-books-1 | Passing a non iterable to a <for> loop is deprecated. Prefer to use an <if> around the loop instead.
+alura-books-1 |   at views/index.marko.js:23:3
+alura-books-1 | 
+nginx      | 172.20.0.1 - - [16/Aug/2020:18:22:17 +0000] "GET / HTTP/1.1" 200 378 "-" "Mozilla/5.0 (X11; Linux x86_64; rv:79.0) Gecko/20100101 Firefox/79.0"
+nginx      | 172.20.0.1 - - [16/Aug/2020:18:22:17 +0000] "GET /favicon.ico HTTP/1.1" 404 150 "-" "Mozilla/5.0 (X11; Linux x86_64; rv:79.0) Gecko/20100101 Firefox/79.0"
+alura-books-3 | Exibindo a Home!
+alura-books-3 | 
+alura-books-3 | WARNING!!
+alura-books-3 | Passing a non iterable to a <for> loop is deprecated. Prefer to use an <if> around the loop instead.
+alura-books-3 |   at views/index.marko.js:23:3
+alura-books-3 | 
+nginx      | 172.20.0.1 - - [16/Aug/2020:18:22:46 +0000] "GET / HTTP/1.1" 200 378 "-" "Mozilla/5.0 (X11; Linux x86_64; rv:79.0) Gecko/20100101 Firefox/79.0"
+alura-books-1 | Exibindo a Home!
+nginx      | 172.20.0.1 - - [16/Aug/2020:18:22:52 +0000] "GET / HTTP/1.1" 200 378 "-" "Mozilla/5.0 (X11; Linux x86_64; rv:79.0) Gecko/20100101 Firefox/79.0"
+alura-books-2 | Exibindo a Home!
+alura-books-2 | 
+alura-books-2 | WARNING!!
+alura-books-2 | Passing a non iterable to a <for> loop is deprecated. Prefer to use an <if> around the loop instead.
+alura-books-2 |   at views/index.marko.js:23:3
+alura-books-2 | 
+nginx      | 172.20.0.1 - - [16/Aug/2020:18:22:56 +0000] "GET / HTTP/1.1" 200 378 "-" "Mozilla/5.0 (X11; Linux x86_64; rv:79.0) Gecko/20100101 Firefox/79.0"
+alura-books-3 | Exibindo a Home!
+nginx      | 172.20.0.1 - - [16/Aug/2020:18:23:07 +0000] "GET / HTTP/1.1" 200 378 "-" "Mozilla/5.0 (X11; Linux x86_64; rv:79.0) Gecko/20100101 Firefox/79.0"
+alura-books-1 | Exibindo a Home!
+nginx      | 172.20.0.1 - - [16/Aug/2020:18:23:13 +0000] "GET / HTTP/1.1" 200 378 "-" "Mozilla/5.0 (X11; Linux x86_64; rv:79.0) Gecko/20100101 Firefox/79.0"
+alura-books-2 | Exibindo a Home!
+nginx      | 172.20.0.1 - - [16/Aug/2020:18:23:17 +0000] "GET / HTTP/1.1" 200 378 "-" "Mozilla/5.0 (X11; Linux x86_64; rv:79.0) Gecko/20100101 Firefox/79.0"
+alura-books-3 | Exibindo a Home!
+nginx      | 172.20.0.1 - - [16/Aug/2020:18:23:28 +0000] "GET / HTTP/1.1" 200 378 "-" "Mozilla/5.0 (X11; Linux x86_64; rv:79.0) Gecko/20100101 Firefox/79.0"
+alura-books-1 | Exibindo a Home!
+nginx      | 172.20.0.1 - - [16/Aug/2020:18:23:31 +0000] "GET / HTTP/1.1" 200 378 "-" "Mozilla/5.0 (X11; Linux x86_64; rv:79.0) Gecko/20100101 Firefox/79.0"
+nginx      | 172.20.0.1 - - [16/Aug/2020:18:23:39 +0000] "GET /seed HTTP/1.1" 200 13 "-" "Mozilla/5.0 (X11; Linux x86_64; rv:79.0) Gecko/20100101 Firefox/79.0"
+alura-books-3 | Exibindo a Home!
+nginx      | 172.20.0.1 - - [16/Aug/2020:18:23:47 +0000] "GET / HTTP/1.1" 200 378 "-" "Mozilla/5.0 (X11; Linux x86_64; rv:79.0) Gecko/20100101 Firefox/79.0"
+alura-books-1 | Exibindo a Home!
+nginx      | 172.20.0.1 - - [16/Aug/2020:18:23:53 +0000] "GET / HTTP/1.1" 200 378 "-" "Mozilla/5.0 (X11; Linux x86_64; rv:79.0) Gecko/20100101 Firefox/79.0"
+alura-books-2 | Exibindo a Home!
+nginx      | 172.20.0.1 - - [16/Aug/2020:18:23:57 +0000] "GET / HTTP/1.1" 200 378 "-" "Mozilla/5.0 (X11; Linux x86_64; rv:79.0) Gecko/20100101 Firefox/79.0"
+alura-books-3 | Exibindo a Home!
+nginx      | 172.20.0.1 - - [16/Aug/2020:18:23:58 +0000] "GET / HTTP/1.1" 200 378 "-" "Mozilla/5.0 (X11; Linux x86_64; rv:79.0) Gecko/20100101 Firefox/79.0"
+nginx      | 172.20.0.1 - - [16/Aug/2020:18:24:04 +0000] "GET /seed HTTP/1.1" 304 0 "-" "Mozilla/5.0 (X11; Linux x86_64; rv:79.0) Gecko/20100101 Firefox/79.0"
+nginx      | 172.20.0.1 - - [16/Aug/2020:18:24:07 +0000] "GET /seed HTTP/1.1" 304 0 "-" "Mozilla/5.0 (X11; Linux x86_64; rv:79.0) Gecko/20100101 Firefox/79.0"
+alura-books-3 | Exibindo a Home!
+nginx      | 172.20.0.1 - - [16/Aug/2020:18:24:13 +0000] "GET / HTTP/1.1" 200 378 "-" "Mozilla/5.0 (X11; Linux x86_64; rv:79.0) Gecko/20100101 Firefox/79.0"
+alura-books-1 | Exibindo a Home!
+nginx      | 172.20.0.1 - - [16/Aug/2020:18:24:19 +0000] "GET / HTTP/1.1" 200 378 "-" "Mozilla/5.0 (X11; Linux x86_64; rv:79.0) Gecko/20100101 Firefox/79.0"
+alura-books-2 | Exibindo a Home!
+nginx      | 172.20.0.1 - - [16/Aug/2020:18:24:21 +0000] "GET / HTTP/1.1" 200 378 "-" "Mozilla/5.0 (X11; Linux x86_64; rv:79.0) Gecko/20100101 Firefox/79.0"
+alura-books-3 | Exibindo a Home!
+nginx      | 172.20.0.1 - - [16/Aug/2020:18:24:22 +0000] "GET / HTTP/1.1" 200 378 "-" "Mozilla/5.0 (X11; Linux x86_64; rv:79.0) Gecko/20100101 Firefox/79.0"
+nginx      | 172.20.0.1 - - [16/Aug/2020:18:24:24 +0000] "GET / HTTP/1.1" 200 378 "-" "Mozilla/5.0 (X11; Linux x86_64; rv:79.0) Gecko/20100101 Firefox/79.0"
+alura-books-1 | Exibindo a Home!
+alura-books-2 | Exibindo a Home!
+nginx      | 172.20.0.1 - - [16/Aug/2020:18:24:27 +0000] "GET / HTTP/1.1" 200 378 "-" "Mozilla/5.0 (X11; Linux x86_64; rv:79.0) Gecko/20100101 Firefox/79.0"
+alura-books-3 | Exibindo a Home!
+nginx      | 172.20.0.1 - - [16/Aug/2020:18:24:36 +0000] "GET / HTTP/1.1" 200 378 "-" "Mozilla/5.0 (X11; Linux x86_64; rv:79.0) Gecko/20100101 Firefox/79.0"
